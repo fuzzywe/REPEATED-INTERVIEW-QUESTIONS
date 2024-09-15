@@ -1,0 +1,63 @@
+
+What are triggers in a DBMS?
+
+Answer:
+Triggers in a DBMS are special stored procedures that are automatically executed in response to specific events on a particular table or view. These events can include INSERT, UPDATE, or DELETE operations. Triggers are used to enforce business rules, maintain data integrity, and perform additional actions such as logging or auditing.
+
+What are the different types of triggers in a DBMS?
+
+Answer:
+There are several types of triggers in a DBMS, including:
+
+BEFORE Triggers: Executed before the triggering event (e.g., BEFORE INSERT, BEFORE UPDATE, BEFORE DELETE).
+AFTER Triggers: Executed after the triggering event (e.g., AFTER INSERT, AFTER UPDATE, AFTER DELETE).
+INSTEAD OF Triggers: Used with views to perform operations instead of the triggering event.
+ROW-LEVEL Triggers: Executed for each row affected by the triggering event.
+STATEMENT-LEVEL Triggers: Executed once for the entire statement that caused the triggering event.
+What are the common use cases for triggers in a DBMS?
+
+Answer:
+Common use cases for triggers in a DBMS include:
+
+Enforcing business rules and data integrity.
+Automatically updating related tables or fields.
+Logging and auditing changes to the database.
+Implementing complex validation logic.
+Performing calculations or aggregations.
+How do you create a trigger in a DBMS?
+
+Answer:
+The syntax for creating a trigger varies slightly between different DBMSs, but the general structure is as follows:
+
+
+CREATE TRIGGER trigger_name
+BEFORE | AFTER event
+ON table_name
+FOR EACH ROW
+BEGIN
+    -- Trigger logic
+END;
+Example in MySQL:
+
+
+CREATE TRIGGER before_insert_trigger
+BEFORE INSERT ON employees
+FOR EACH ROW
+BEGIN
+    SET NEW.created_at = NOW();
+END;
+What are the advantages and disadvantages of using triggers in a DBMS?
+
+Answer:
+Advantages:
+
+Automatically enforce business rules and data integrity.
+Centralize logic for maintaining related tables or fields.
+Provide a way to perform complex validation and calculations.
+Enable logging and auditing of database changes.
+Disadvantages:
+
+Can make the database schema more complex and harder to understand.
+May introduce performance overhead, especially with complex triggers.
+Can lead to unexpected behavior if not properly documented and managed.
+May make debugging more difficult, as triggers are automatically executed.
