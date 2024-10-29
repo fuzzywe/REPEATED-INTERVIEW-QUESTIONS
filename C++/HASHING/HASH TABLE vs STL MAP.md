@@ -1,5 +1,7 @@
 https://www.naukri.com/code360/library/hash-table-vs-stl-map
 
+https://crackfaang.medium.com/intro-to-hashing-in-c-c0882b0c53b2
+
 Introduction
 Hash tables and STL maps (See Maps in C++) are very useful data structures in computer science. Here we will see the comparison between their properties as well as implementation. First, we will discuss their properties one by one, and then we will differentiate them based on their key characteristics.
 
