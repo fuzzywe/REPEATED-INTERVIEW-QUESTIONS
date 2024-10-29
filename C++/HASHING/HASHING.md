@@ -1,6 +1,11 @@
 how and why hashing is done ( a small discussion on it ) then he asked me about Map and some STL function on about how they are implemented in c++  i.e internal working and a little code explanation of them
 
 
+https://www.hackerearth.com/practice/data-structures/hash-tables/basics-of-hash-tables/tutorial/
+
+look the above link for the implementation part very important
+
+
 **What is Hashing in C++?**
 
 
