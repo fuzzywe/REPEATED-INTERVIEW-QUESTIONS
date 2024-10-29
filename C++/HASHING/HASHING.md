@@ -22,6 +22,129 @@ As an example, the hashing technique makes finding a person's contact informatio
 How to Work with Hash Function in C++?
 The hash function yields an integer value from the given key, be it a character, string, integer, etc., and associates this index with the actual key.
 
+### Hashing: How and Why
+
+#### What is Hashing?
+
+Hashing is a technique used to uniquely identify a specific object from a group of similar objects. It involves using a hash function to convert data into a fixed-size numerical value, which is then used as an index in a hash table.
+
+#### Why Use Hashing?
+
+1. **Efficient Lookup**: Hashing allows for constant-time complexity (O(1)) for search, insert, and delete operations, making it highly efficient for large datasets.
+2. **Data Integrity**: Hash functions are used in cryptography to ensure data integrity and security.
+3. **Load Balancing**: Hashing is used in distributed systems to evenly distribute data across multiple servers.
+
+#### How Hashing Works
+
+1. **Hash Function**: A hash function takes input data (or a key) and returns a fixed-size string of bytes. Common hash functions include MD5, SHA-1, and SHA-256.
+2. **Hash Table**: The output of the hash function is used as an index in a hash table, which is an array of buckets. Each bucket contains a list of elements that hash to the same index.
+3. **Collision Handling**: Since multiple keys can hash to the same index (a collision), techniques like chaining (linked lists) or open addressing (probing) are used to handle collisions.
+
+#### Example in C++
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+
+int main() {
+    std::unordered_map<std::string, int> hashMap;
+
+    // Insert key-value pairs
+    hashMap["apple"] = 1;
+    hashMap["banana"] = 2;
+    hashMap["cherry"] = 3;
+
+    // Access values
+    std::cout << "Value of 'apple': " << hashMap["apple"] << std::endl;
+
+    // Check if key exists
+    if (hashMap.find("banana") != hashMap.end()) {
+        std::cout << "Value of 'banana': " << hashMap["banana"] << std::endl;
+    }
+
+    return 0;
+}
+```
+
+### Map and STL Functions in C++
+
+#### std::map
+
+`std::map` is a part of the C++ Standard Template Library (STL) that implements a balanced binary search tree (usually a Red-Black Tree). It stores key-value pairs and maintains the keys in a sorted order.
+
+##### Internal Working
+
+- **Balanced Tree**: `std::map` uses a balanced tree to ensure that the tree remains balanced after insertions and deletions, providing O(log n) time complexity for search, insert, and delete operations.
+- **Ordered Keys**: The keys are stored in a sorted order, which allows for efficient range queries and traversal.
+
+##### Example
+
+```cpp
+#include <iostream>
+#include <map>
+
+int main() {
+    std::map<std::string, int> myMap;
+
+    // Insert key-value pairs
+    myMap["apple"] = 1;
+    myMap["banana"] = 2;
+    myMap["cherry"] = 3;
+
+    // Access values
+    std::cout << "Value of 'apple': " << myMap["apple"] << std::endl;
+
+    // Iterate through the map
+    for (const auto& pair : myMap) {
+        std::cout << pair.first << ": " << pair.second << std::endl;
+    }
+
+    return 0;
+}
+```
+
+#### std::unordered_map
+
+`std::unordered_map` is another associative container in the STL that implements a hash table. It stores key-value pairs but does not maintain any order among the keys.
+
+##### Internal Working
+
+- **Hash Table**: `std::unordered_map` uses a hash table to achieve average-case constant-time complexity (O(1)) for search, insert, and delete operations.
+- **Collision Handling**: Collisions are handled using chaining (linked lists) or open addressing (probing).
+
+##### Example
+
+```cpp
+#include <iostream>
+#include <unordered_map>
+
+int main() {
+    std::unordered_map<std::string, int> myHashMap;
+
+    // Insert key-value pairs
+    myHashMap["apple"] = 1;
+    myHashMap["banana"] = 2;
+    myHashMap["cherry"] = 3;
+
+    // Access values
+    std::cout << "Value of 'apple': " << myHashMap["apple"] << std::endl;
+
+    // Iterate through the unordered_map
+    for (const auto& pair : myHashMap) {
+        std::cout << pair.first << ": " << pair.second << std::endl;
+    }
+
+    return 0;
+}
+```
+
+### Summary
+
+- **Hashing**: A technique for efficient data lookup and integrity verification using hash functions and hash tables.
+- **std::map**: An ordered associative container that uses a balanced binary search tree to store key-value pairs.
+- **std::unordered_map**: An unordered associative container that uses a hash table to store key-value pairs.
+
+Both `std::map` and `std::unordered_map` are powerful tools in the C++ STL for managing key-value pairs, each with its own strengths and use cases.
 
 ### Hashing
 
