@@ -1,3 +1,5 @@
+https://www.naukri.com/code360/library/hash-table-vs-stl-map
+
 Introduction
 Hash tables and STL maps (See Maps in C++) are very useful data structures in computer science. Here we will see the comparison between their properties as well as implementation. First, we will discuss their properties one by one, and then we will differentiate them based on their key characteristics.
 
@@ -133,7 +135,7 @@ Implementation
 
 STL map is generally implemented using a red-black tree where the insertion and deletion algorithm takes O(log n) time and O(1) for rebalancing.
 
- 
+ ```cpp
 
 #include <iostream>
 
@@ -177,6 +179,8 @@ int main(){
 
     return 0;
 }
+
+```
 You can also try this code with Online C++ Compiler
 Run Code
  
