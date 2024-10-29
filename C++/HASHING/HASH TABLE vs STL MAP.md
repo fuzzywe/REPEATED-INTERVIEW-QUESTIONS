@@ -10,7 +10,8 @@ Hash Table is a special type of data structure that stores data(key-value pair) 
 
 Example
 
- 
+ ![hash-table-vs-stl-map-0-1640100783](https://github.com/user-attachments/assets/ed52f021-3250-42ce-8926-e04b62aae084)
+
 
 In the above diagram, keys are mapped to corresponding indices of the hash table using the hash function.
 
