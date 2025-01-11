@@ -403,3 +403,129 @@ int main() {
 - **Memory Efficiency**: In batch input, only one small array of size 1000 is used, making it scalable for very large inputs.
 
 This strategy works efficiently even for **very large streams** or **real-time data processing**.
+
+Uninitialized **static** and **global variables** are stored in the **BSS (Block Started by Symbol) segment** of a program's memory.
+
+### **Memory Segments**
+1. **BSS Segment**:
+   - Stores **uninitialized** global and static variables.
+   - Allocated at program startup but not initialized with any specific value (set to zero by default).
+   - Example:
+     ```c
+     static int count;  // Stored in BSS (initial value is 0)
+     int globalVar;     // Stored in BSS (initial value is 0)
+     ```
+
+2. **Data Segment**:
+   - Stores **initialized** global and static variables.
+   - Example:
+     ```c
+     static int initializedVar = 5;  // Stored in data segment
+     int globalInitialized = 10;    // Stored in data segment
+     ```
+
+3. **Heap**:
+   - Stores dynamically allocated memory (e.g., `malloc` or `new`).
+
+4. **Stack**:
+   - Stores local variables and function call-related data.
+
+### **Summary**
+| Variable Type        | Memory Segment |
+|----------------------|----------------|
+| Uninitialized global/static | BSS            |
+| Initialized global/static   | Data segment   |
+| Local variables        | Stack          |
+| Dynamically allocated  | Heap           |
+
+---
+
+
+How is the control of program passed from main() to any other function? where is the return address of main stored
+
+
+When control is passed from `main()` to another function, several steps take place in the **function call mechanism**, involving **stack operations**. The **return address** of `main()` is stored in a specific location to allow proper return control flow.
+
+### **Step-by-Step Flow of Function Call**
+1. **Calling a Function from `main()`**:
+   - The **return address** (the instruction immediately after the function call) is pushed onto the **call stack**.
+   - **Arguments (if any)** to the called function are pushed onto the stack or passed via registers, depending on the system's calling convention.
+   - Control transfers to the **entry point** of the called function.
+
+2. **Function Execution**:
+   - The function executes its code.
+   - Local variables and the function’s stack frame are managed on the stack.
+
+3. **Returning from the Function**:
+   - The function finishes execution.
+   - The return address is popped from the stack.
+   - Control jumps back to the location stored in the return address (the point after the function call in `main()`).
+
+### **Where is the Return Address of `main()` Stored?**
+The **return address of `main()`** is stored by the system in a **special location defined by the operating system**, typically in the **call stack** when the program is started by the operating system loader. The stack frame created by the operating system may store it at:
+- **Top of the call stack** or
+- **Special registers** depending on the system's architecture.
+
+In **most architectures**, when the entire program finishes executing, the return address points back to a system routine (like `_exit`) provided by the runtime environment.
+
+---
+
+### **Summary**
+- **Control Transfer**: Via the **call stack** using return addresses.
+- **Return Address of `main()`**: Stored on the **stack** or **registers** as managed by the OS and system architecture.
+- **Program End**: Return address from `main()` points to system exit routines.
+
+  Operating System Question
+In a unix or linux file system, how file path resolved? For example : /root/home/ooo/abc.c
+
+Add your answer
+
+In a **Unix or Linux file system**, the process of **file path resolution** involves multiple steps to locate the file referenced by a path such as `/root/home/ooo/abc.c`. Here's how it works:
+
+---
+
+### **Step-by-Step Path Resolution**
+
+1. **Start at the Root Directory (`/`)**:
+   - The path `/root/home/ooo/abc.c` is an **absolute path** because it starts with `/`. The resolution begins from the **root directory**.
+   - The root directory (`/`) is represented by an inode (a data structure containing metadata and pointers to data blocks).
+
+2. **Traverse Each Directory in Sequence**:
+   - The system resolves each component in the path (`root`, `home`, `ooo`, and finally `abc.c`) one at a time.
+   - It starts with looking up the `root` directory in the root's inode.
+
+3. **Directory Entry Lookup**:
+   - Each directory (`root`, `home`, `ooo`) contains entries mapping file/directory names to inodes.
+   - For example:
+     - `/root` is found by reading the entries in the root directory.
+     - The inode for `root` is used to find `home`.
+     - Similarly, `home` is used to find `ooo`.
+
+4. **Access the Final File**:
+   - The last component `abc.c` is located within the `ooo` directory by using its inode and data blocks.
+   - The inode for `abc.c` provides the file's metadata and data locations.
+
+5. **File Permission and Access Checks**:
+   - During each step, **permission checks** are performed to ensure the user has the right to traverse the directories and access the file.
+
+---
+
+### **Path Components in Detail**
+| Path Component   | Description                                   |
+|------------------|-----------------------------------------------|
+| `/`              | Root directory (starting point for absolute paths). |
+| `root`           | First directory within the root, looked up by its inode. |
+| `home`           | Subdirectory within `/root`, accessed from `root`’s inode. |
+| `ooo`            | Directory within `/root/home`.                |
+| `abc.c`          | File within `/root/home/ooo`, located by its inode. |
+
+---
+
+### **Optimization Techniques**
+- **Path Caching**: Frequently accessed paths may be cached to avoid repetitive traversals.
+- **Symbolic Links and Hard Links**: Resolved by reading link targets for symbolic links, while hard links point to the same inode directly.
+
+---
+
+### **Conclusion**
+File path resolution in Unix/Linux systems involves traversing the directory hierarchy, starting from the root, using inodes and directory entries to find each component, performing permission checks, and finally accessing the file or directory requested.
