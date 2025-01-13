@@ -27,3 +27,56 @@ The difference between a for loop and a while loop is that in a for loop, the nu
  
 What do you mean by instance variable in Java?
 When we have to instantiate an object, instance variables are created and are accessible to all constructors, methods, and blocks in the class.
+In Java, instance variables are unique to each object created from a class. This means that when you create multiple objects from the same class, each object gets its own independent copy of the instance variables. As a result, modifying the instance variables of one object does not affect the values of the same instance variables in another object.
+
+Why This Happens:
+
+When you create an object using the new keyword, Java allocates separate memory for that object's instance variables.
+
+Each object maintains its own state, which is represented by the values stored in its instance variables.
+
+
+Example for Better Understanding
+
+public class Person {
+    // Instance variable
+    private String name;
+
+    // Constructor
+    public Person(String name) {
+        this.name = name;
+    }
+
+    // Method to change name
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    // Method to display name
+    public void display() {
+        System.out.println("Name: " + name);
+    }
+
+    public static void main(String[] args) {
+        Person person1 = new Person("Alice");
+        Person person2 = new Person("Bob");
+
+        person1.display();  // Output: Name: Alice
+        person2.display();  // Output: Name: Bob
+
+        // Change the name of person1
+        person1.setName("Charlie");
+        person1.display();  // Output: Name: Charlie
+        person2.display();  // Output: Name: Bob
+    }
+}
+
+In this example:
+
+person1 and person2 are separate objects of the Person class.
+
+They have separate copies of the name instance variable.
+
+Changing person1's name to "Charlie" does not affect person2's name, which remains "Bob". This demonstrates that each object maintains its own copy of instance variables.
+
+
